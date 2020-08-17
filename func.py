@@ -1,4 +1,30 @@
+import time
+import datetime
 import numpy as np
+
+
+def getMilliS():
+    """get millisecond of now in string of length 3"""
+    a = str(int(time.time()*1000)%1000)
+    if len(a) == 1: return '00'+a
+    if len(a) == 2: return '0'+a
+    return a
+
+
+def getTime():
+    """get time in format HH:MM:SS.MS"""
+    now = time.strftime('%H:%M:%S', time.localtime())
+    return now+'.'+getMilliS()
+
+
+def getDate():
+    """get date time in format YYYY_MM_DD"""
+    return datetime.date.today().isoformat()
+
+
+def getDateTime():
+    """get date time in formate YYYY_MM_DD HH:MM:SS.MS"""
+    return getDate()+' '+getTime()
 
 
 def weighted_input(w, a, b):
