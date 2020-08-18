@@ -10,7 +10,7 @@ class fffnn():
     def __init__(self, sizes):
         """ sizes: a tuple like (784, 15, 10),
             af: activation function,
-            afdz: derivative of af for z, 
+            afdz: derivative of af for z,
             cf: cost function for a single input,
             cfda: derivative of cf for a. """
         self.af = func.sigmoid
@@ -21,7 +21,7 @@ class fffnn():
         self.num_layers = len(sizes)
         self.sizes = sizes
         self.b = [np.random.randn(x,1).astype(ds.DTYPE) for x in sizes[1:]]
-        self.w = [np.random.randn(x,y).astype(ds.DTYPE) 
+        self.w = [np.random.randn(x,y).astype(ds.DTYPE)
                         for x,y in zip(sizes[1:],sizes[:-1])]
         self.a = []  # layered activation value, including input layer.
         self.z = []  # layered weighted input
@@ -30,7 +30,7 @@ class fffnn():
         """ feedforward """
         for w,b in zip(self.w, self.b):
             a = self.af(func.weighted_input(w,a,b))
-        return a 
+        return a
 
     def anz(self, a):
         """compute layered a and z,
@@ -45,11 +45,15 @@ class fffnn():
     def cost(self, data):
         """total averaged cost over data pairs"""
         return sum([self.cf(x[1],self.ff(x[0])) for x in data])/len(data)
-    
+
+    def cost2(self, y, x):
+        """total averaged cost over data pairs"""
+        return self.cf(y, self.ff(x))/y.shape[1]
+
     def backprop(self, x, y):
         """backprop algorithm, get gradient.
         x, y are a single pair of the known input and output
-        return nabla w and b tuple with the same shape of nn."""  
+        return nabla w and b tuple with the same shape of nn."""
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
         self.anz(x)
@@ -65,7 +69,7 @@ class fffnn():
         return nabla_w, nabla_b
 
     def gd(self, data, eta):
-        """ gradient descent """    
+        """ gradient descent """
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
         num = len(data)
@@ -82,5 +86,30 @@ class fffnn():
         mb = [trd[k:k+mblen] for k in range(0,len(trd),mblen)]
         for i in range(len(mb)):
             self.gd(mb[i], eta)
+
+    def backprop2(self, x, y):
+        nabla_w = [np.zeros_like(w) for w in self.w]
+        nabla_b = [np.zeros_like(b) for b in self.b]
+        self.anz(x)
+        # the output layer
+        delta = self.cfda(y, self.a[-1])*self.afdz(self.z[-1])
+        nabla_b[-1] = np.sum(delta,axis=1).reshape(nabla_b[-1].shape)
+        nabla_w[-1] = delta @ self.a[-2].T
+        # the rest layer, backward
+        for i in range(self.num_layers-2, 0, -1):
+            delta = self.w[i].T @ delta * self.afdz(self.z[i-1])
+            nabla_b[i-1] = np.sum(delta,axis=1).reshape(nabla_b[i-1].shape)
+            nabla_w[i-1] = delta @ self.a[i-1].T
+        return nabla_w, nabla_b
+
+    def gd2(self, x, y, eta):
+        """ gradient descent, matrix-based  """
+        nabla_w = [np.zeros_like(w) for w in self.w]
+        nabla_b = [np.zeros_like(b) for b in self.b]
+        num = x.shape[1]
+        delta_w, delta_b = self.backprop2(x, y)
+        self.w = [x-eta*w/num for x,w in zip(self.w, delta_w)]
+        self.b = [x-eta*b/num for x,b in zip(self.b, delta_b)]
+
 
 
