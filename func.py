@@ -47,8 +47,6 @@ def qcost_x(y, a):
     """Quadratic cost function only for a single input x,
     Cx = 1/2 * ||y(x)-a(x)||^2,
     output is float number."""
-    if y.shape[1] != 1:
-        return sum(0.5*np.linalg.norm(x)**2 for x in (y-a).T)
     return 0.5*(np.linalg.norm(y-a)**2)
 
 
