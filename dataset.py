@@ -134,6 +134,22 @@ def get_mnist():
     return tr, te
 
 
+def get_mnist2():
+    trd, vad, ted = load_data()
+    trdi2 = np.hstack([np.reshape(x,(784,1)) for x in trd[0]])
+    vadi2 = np.hstack([np.reshape(x,(784,1)) for x in vad[0]])
+    trdi2 = np.hstack((trdi2,vadi2))
+    trdl2 = np.hstack([vectorized_result(y) for y in trd[1]])
+    vadl2 = np.hstack([vectorized_result(y) for y in vad[1]])
+    trdl2 = np.hstack((trdl2,vadl2))
+    tedi2 = np.hstack([np.reshape(x,(784,1)) for x in ted[0]])
+    tedl2 = np.hstack([vectorized_result(y) for y in ted[1]])
+    return (trdi2.astype(DTYPE),
+            trdl2.astype(DTYPE),
+            tedi2.astype(DTYPE),
+            tedl2.astype(DTYPE))
+
+
 def get_mnist_tanh():
     tr, te = get_mnist()
     trd = []

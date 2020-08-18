@@ -16,7 +16,7 @@ sizes = (784,20,10)
 nn = nnet.fffnn(sizes)
 eta = 0.01  # learning rate
 mblen = 10  # mini batch length
-epoch = 10000
+epoch = 100000
 
 # record files
 passed_file = 'passed.txt'
