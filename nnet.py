@@ -40,15 +40,15 @@ class fffnn():
             self.z.append(func.weighted_input(w,self.a[-1],b))
             self.a.append(self.af(self.z[-1]))
 
-    def cost(self, data):
+    def cost_slow(self, data):
         """total averaged cost over data pairs"""
         return sum([self.cf(x[1],self.ff(x[0])) for x in data])/len(data)
 
-    def cost2(self, y, x):
+    def cost(self, y, x):
         """total averaged cost over data pairs"""
         return self.cf(y, self.ff(x))/y.shape[1]
 
-    def backprop(self, x, y):
+    def backprop_slow(self, x, y):
         """backprop algorithm, get gradient.
         x, y are a single pair of the known input and output
         return nabla w and b tuple with the same shape of nn."""
@@ -66,7 +66,7 @@ class fffnn():
             nabla_w[i-1] = delta @ self.a[i-1].T
         return nabla_w, nabla_b
 
-    def gd(self, data, eta):
+    def gd_slow(self, data, eta):
         """ gradient descent """
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
@@ -78,14 +78,7 @@ class fffnn():
         self.w = [x-eta*w/num for x,w in zip(self.w, nabla_w)]
         self.b = [x-eta*b/num for x,b in zip(self.b, nabla_b)]
 
-    def sgd(self, trd, mblen, eta):
-        """ stochastic gradient descent for one epoch """
-        random.shuffle(trd)
-        mb = [trd[k:k+mblen] for k in range(0,len(trd),mblen)]
-        for i in range(len(mb)):
-            self.gd(mb[i], eta)
-
-    def backprop2(self, x, y):
+    def backprop(self, x, y):
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
         self.anz(x)
@@ -100,7 +93,7 @@ class fffnn():
             nabla_w[i-1] = delta @ self.a[i-1].T
         return nabla_w, nabla_b
 
-    def gd2(self, x, y, eta):
+    def gd(self, x, y, eta):
         """ gradient descent, matrix-based  """
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
