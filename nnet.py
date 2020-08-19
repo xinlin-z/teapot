@@ -72,7 +72,7 @@ class fffnn():
         nabla_b = [np.zeros_like(b) for b in self.b]
         num = len(data)
         for x,y in data:
-            delta_w, delta_b = self.backprop(x, y)
+            delta_w, delta_b = self.backprop_slow(x, y)
             nabla_w = [j+k for j,k in zip(nabla_w,delta_w)]
             nabla_b = [j+k for j,k in zip(nabla_b,delta_b)]
         self.w = [x-eta*w/num for x,w in zip(self.w, nabla_w)]
@@ -89,7 +89,7 @@ class fffnn():
         # the rest layer, backward
         for i in range(self.num_layers-2, 0, -1):
             delta = self.w[i].T @ delta * self.afdz(self.z[i-1])
-            nabla_b[i-1] = np.sum(delta,axis=1).reshape(nabla_b[i-1].shape)
+            nabla_b[i-1] = np.sum(delta,axis=1,keepdims=True)
             nabla_w[i-1] = delta @ self.a[i-1].T
         return nabla_w, nabla_b
 
