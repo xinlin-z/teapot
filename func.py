@@ -54,3 +54,15 @@ def qcost_x_da(y, a):
     """ partial derivative of qcost_x for a """
     return a-y
 
+
+def cross_entropy_x(y, a):
+    """ cross-entropy cost
+    Cx = -sum((y*ln(a) + (1-y)*ln(1-a))) """
+    return -np.sum(y*np.log(a)+(1-y)*np.log(1-a))
+
+
+def cross_entropy_x_da(y, a):
+    """ partial derivative of corssentropy for a """
+    return (a-y)/(a*(1-a))
+
+

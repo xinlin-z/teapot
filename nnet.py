@@ -8,16 +8,7 @@ class fffnn():
     """FeedForward Fully Connected Neural Network."""
 
     def __init__(self, sizes):
-        """ sizes: a tuple like (784, 15, 10),
-            af: activation function,
-            afdz: derivative of af for z,
-            cf: cost function for a single input,
-            cfda: derivative of cf for a. """
-        self.af = func.sigmoid
-        self.afdz = func.sigmoid_dz
-        self.cf = func.qcost_x
-        self.cfda = func.qcost_x_da
-        #
+        """ sizes: a tuple like (784, 15, 10) """
         self.num_layers = len(sizes)
         self.sizes = sizes
         self.b = [np.random.randn(x,1).astype(ds.DTYPE) for x in sizes[1:]]
@@ -25,6 +16,13 @@ class fffnn():
                         for x,y in zip(sizes[1:],sizes[:-1])]
         self.a = []  # layered activation value, including input layer.
         self.z = []  # layered weighted input
+
+    def load(*, activation_func, activation_func_dz,
+                cost_func, cost_func_da):
+        self.af = activation_func
+        self.afdz = activation_func_dz
+        self.cf = cost_func
+        self.cfda = cost_func_da
 
     def ff(self, a):
         """ feedforward """
