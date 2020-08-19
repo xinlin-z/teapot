@@ -83,7 +83,11 @@ class fffnn():
         nabla_b = [np.zeros_like(b) for b in self.b]
         self.anz(x)
         # the output layer
-        delta = self.cfda(y, self.a[-1])*self.afdz(self.z[-1])
+        if (self.cfda is func.cross_entropy_x_da
+            and self.afdz is func.sigmoid_dz):
+            delta = self.a[-1] - y  # a little speed up
+        else:
+            delta = self.cfda(y, self.a[-1])*self.afdz(self.z[-1])
         nabla_b[-1] = np.sum(delta,axis=1).reshape(nabla_b[-1].shape)
         nabla_w[-1] = delta @ self.a[-2].T
         # the rest layer, backward
