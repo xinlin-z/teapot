@@ -17,8 +17,8 @@ class fffnn():
         self.a = []  # layered activation value, including input layer.
         self.z = []  # layered weighted input
 
-    def load(*, activation_func, activation_func_dz,
-                cost_func, cost_func_da):
+    def load(self, *, activation_func, activation_func_dz,
+                      cost_func, cost_func_da):
         self.af = activation_func
         self.afdz = activation_func_dz
         self.cf = cost_func
@@ -98,7 +98,7 @@ class fffnn():
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
         num = x.shape[1]
-        delta_w, delta_b = self.backprop2(x, y)
+        delta_w, delta_b = self.backprop(x, y)
         self.w = [x-eta*w/num for x,w in zip(self.w, delta_w)]
         self.b = [x-eta*b/num for x,b in zip(self.b, delta_b)]
 

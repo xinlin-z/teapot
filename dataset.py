@@ -134,7 +134,7 @@ def get_mnist():
     return tr, te
 
 
-def get_mnist2():
+def load_mnist():
     trd, vad, ted = load_data()
     trdi2 = np.hstack([np.reshape(x,(784,1)) for x in trd[0]])
     vadi2 = np.hstack([np.reshape(x,(784,1)) for x in vad[0]])
