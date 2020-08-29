@@ -1,14 +1,14 @@
 """
 train data and test data are separated as two data.
-For each data, it is a list with tuples like (x,y). 
+For each data, it is a list with tuples like (x,y).
 For each tuple in list, x and y are both numpy ndarray.
 x represents input, y represents output correspondingly.
-The dtype of ndarray for x and y are both float64 (for numba). 
-The position(index) with 1.0(for both sigmoid and tanh) value in vector 
+The dtype of ndarray for x and y are both float64 (for numba).
+The position(index) with 1.0(for both sigmoid and tanh) value in vector
 y indicates the corect classification info.
 
-Best practice is to normalize the input of the network between 0 and 1 
-if sigmoid is the activation function and -0.5 and 0.5 if tanh is the 
+Best practice is to normalize the input of the network between 0 and 1
+if sigmoid is the activation function and -0.5 and 0.5 if tanh is the
 activation function. (not for labeled output)
 ReLU is the same with sigmoid.
 
@@ -173,8 +173,8 @@ def get_mnist_cnn():
 ##############################
 # fasion mnist data.
 ##############################
-def load_fmnist(kind): 
-   
+def _load_fmnist(kind):
+
     labels_path = os.path.join(DATA_PATH_PREFIX+'fmnist',
                                '%s-labels-idx1-ubyte.gz'
                                % kind)
@@ -194,13 +194,22 @@ def load_fmnist(kind):
 
 
 def get_fmnist():
-    tr_dx, tr_dy = load_fmnist('train')
-    te_dx, te_dy = load_fmnist('t10k')
-    tr_d = [(np.reshape(x.astype(DATA_FLOAT_TYPE),(784,1))/255, 
+    tr_dx, tr_dy = _load_fmnist('train')
+    te_dx, te_dy = _load_fmnist('t10k')
+    tr_d = [(np.reshape(x.astype(DTYPE),(784,1))/255,
                 vectorized_result(y)) for x,y in zip(tr_dx, tr_dy)]
-    te_d = [(np.reshape(x.astype(DATA_FLOAT_TYPE),(784,1))/255, 
+    te_d = [(np.reshape(x.astype(DTYPE),(784,1))/255,
                 vectorized_result(y)) for x,y in zip(te_dx, te_dy)]
     return tr_d, te_d
+
+
+def load_fmnist():
+    trd, ted = get_fmnist()
+    trdx = np.hstack([x[0] for x in trd])
+    trdy = np.hstack([x[1] for x in trd])
+    tedx = np.hstack([x[0] for x in ted])
+    tedy = np.hstack([x[1] for x in ted])
+    return trdx, trdy, tedx, tedy
 
 
 def get_fmnist_tanh():
@@ -222,7 +231,7 @@ def unpickle(file):
 
 
 def get_cifar10():
-    
+
     tr_d = []
     dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_1')
     for i in range(len(dd['data'])):
@@ -230,7 +239,7 @@ def get_cifar10():
         a = a.astype(DATA_FLOAT_TYPE)
         b = vectorized_result(dd['labels'][i])
         tr_d.append((a,b))
-    
+
     dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_2')
     for i in range(len(dd['data'])):
         a = dd['data'][i].reshape(3,32,32)/255
