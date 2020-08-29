@@ -1,12 +1,4 @@
 """
-dataset included:
-2x+3
-iris,
-mnist,
-fmnist,
-cifar10, 
-~~~~~~~~~~~~  
-
 train data and test data are separated as two data.
 For each data, it is a list with tuples like (x,y). 
 For each tuple in list, x and y are both numpy ndarray.
@@ -20,17 +12,6 @@ if sigmoid is the activation function and -0.5 and 0.5 if tanh is the
 activation function. (not for labeled output)
 ReLU is the same with sigmoid.
 
-USEAGE:
-tr_d = get_2xplus3n()  # for simplest linear regression study case
-tr_d, te_d = get_iris()
-tr_d, te_d = get_mnist()
-tr_d, te_d = get_mnist_tanh()
-tr_d, te_d = get_mnist_cnn()  # channel = 1
-tr_d, te_d = get_fmnist()
-tr_d, te_d = get_fmnist_tanh()
-tr_d, te_d = get_cifar10()
-
-
 If you want to have an extra validation data, please help youself
 by making a slice from tr_d. This is called "hold out" method.
 
@@ -41,6 +22,7 @@ import gzip
 import os
 import random
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 DATA_PATH_PREFIX = 'data/'
@@ -121,6 +103,9 @@ def vectorized_result(j):
     return e
 
 
+##############################
+# mnist data.
+##############################
 def get_mnist():
     """ load mnist in customized float type, 0-1 """
     tr,va,te = load_data_wrapper()
@@ -135,6 +120,7 @@ def get_mnist():
 
 
 def load_mnist():
+    """trdx, trdy, tedx, tedy = load_mnist() """
     trd, vad, ted = load_data()
     trdi2 = np.hstack([np.reshape(x,(784,1)) for x in trd[0]])
     vadi2 = np.hstack([np.reshape(x,(784,1)) for x in vad[0]])
@@ -215,55 +201,6 @@ def get_fmnist_tanh():
         a = tr[i][0] - 0.5
         trd.append((a,tr[i][1]))
     return trd, te
-
-
-############iris#############
-def get_iris():
-    
-    with open(DATA_PATH_PREFIX+'iris.data', 'r') as f:
-        dstr = f.read()
-    
-    tr_d = []
-    te_d = []
-    ditem  = dstr.split()
-    for i in range(len(ditem)):
-        subitem = ditem[i].split(',')
-        x = np.array([subitem[0],subitem[1],subitem[2],subitem[3]],
-                        dtype='float64')
-        if subitem[4] == 'Iris-setosa':
-            y = np.array([1,0,0], dtype=DATA_FLOAT_TYPE)
-        if subitem[4] == 'Iris-versicolor':
-            y = np.array([0,1,0], dtype=DATA_FLOAT_TYPE)
-        if subitem[4] == 'Iris-virginica':
-            y = np.array([0,0,1], dtype=DATA_FLOAT_TYPE)
-        tr_d.append((x.reshape(4,1), y.reshape(3,1)))
-        # tr_d.append((x,y))
-    
-    for i in range(5):
-        te_d.append(tr_d[40+i])
-        del tr_d[40+i]
-        te_d.append(tr_d[80+i])
-        del tr_d[80+i]
-        te_d.append(tr_d[120+i])
-        del tr_d[120+i]
-            
-    random.shuffle(tr_d)
-    random.shuffle(te_d)
-    return tr_d, te_d
-
-
-#######################
-# y = 2x + 3 + noise
-#######################
-def get_2xplus3n():
-    tr_d = []
-    for i in range(100):
-        x = np.array([i], dtype=DATA_FLOAT_TYPE)
-        y = np.array([i*2+3], dtype=DATA_FLOAT_TYPE) + \
-                np.random.randn()*(i+10)/10
-        tr_d.append((x,y))
-    return tr_d 
-
 
 
 #######################
