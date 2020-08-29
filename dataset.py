@@ -103,6 +103,15 @@ def vectorized_result(j):
     return e
 
 
+def show_mnist(imgdata):
+    """mnist imgdata should be ndarray which shape is (784,1)"""
+    plt.imshow(imgdata.reshape(28,28), cmap='gray')
+    plt.show()
+    #plt.draw()
+    #plt.pause(0.001)
+    return
+
+
 ##############################
 # mnist data.
 ##############################
