@@ -1,22 +1,3 @@
-"""
-train data and test data are separated as two data.
-For each data, it is a list with tuples like (x,y).
-For each tuple in list, x and y are both numpy ndarray.
-x represents input, y represents output correspondingly.
-The dtype of ndarray for x and y are both float64 (for numba).
-The position(index) with 1.0(for both sigmoid and tanh) value in vector
-y indicates the corect classification info.
-
-Best practice is to normalize the input of the network between 0 and 1
-if sigmoid is the activation function and -0.5 and 0.5 if tanh is the
-activation function. (not for labeled output)
-ReLU is the same with sigmoid.
-
-If you want to have an extra validation data, please help youself
-by making a slice from tr_d. This is called "hold out" method.
-
-"""
-
 import pickle
 import gzip
 import os
