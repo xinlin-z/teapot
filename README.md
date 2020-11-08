@@ -1,10 +1,26 @@
 # teapot
 
-Here is my ML algorithm test lab. The best learning is by coding.
+Here is my ML algorithm and matplotlib test lab.
 
-## 001
+The best way of learning is by coding. I will try to re-code the ML algorithms
+and use matplotlib to plot in fancy ways.
 
-    $ python3 001_gd_mnist_fmnist.py
+## 0000
+
+    $ python3 0000_show_mnist_fmnist.py
+
+Show images in both mnist and fmnist dataset randomly. Each dataset has one
+matplotlib figure window. The random choose process covers both training set
+and test set. So, we can be confident that the data is good!
+
+![image]()
+
+Try to click on the window, it will restart the whole process and then you
+can see another set of data image, which is also randomly choosed.
+
+## 0010
+
+    $ python3 0010_gd_mnist_fmnist.py
 
 Comparing the training process and results for MNIST and FMNIST dataset by
 pure GD and in a pure feed forward fully connected neural network, which means
