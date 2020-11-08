@@ -4,8 +4,8 @@ import dataset as ds
 import func
 
 
-class fffnn():
-    """FeedForward Fully Connected Neural Network."""
+class fffcnn():
+    """Feedforward Fully Connected Neural Network."""
 
     def __init__(self, sizes):
         """ sizes: a tuple like (784, 15, 10) """

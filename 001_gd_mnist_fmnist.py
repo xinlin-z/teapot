@@ -18,7 +18,7 @@ epoch = 1000
 nn_size = (784,120,10)
 
 # two same network for mnist and fmnsit
-mnn = nnet.fffnn(nn_size)
+mnn = nnet.fffcnn(nn_size)
 mnn.load(
     activation_func =    func.sigmoid,
     activation_func_dz = func.sigmoid_dz,
@@ -26,7 +26,7 @@ mnn.load(
     cost_func_da =       func.cross_entropy_x_da
 )
 
-fnn = nnet.fffnn(nn_size)
+fnn = nnet.fffcnn(nn_size)
 fnn.load(
     activation_func =    func.sigmoid,
     activation_func_dz = func.sigmoid_dz,
