@@ -1,6 +1,6 @@
 # teapot
 
-Here is my ML algorithm test lab. The best learing is by coding.
+Here is my ML algorithm test lab. The best learning is by coding.
 
 ## 001
 
