@@ -13,7 +13,7 @@ Show images in both mnist and fmnist dataset randomly. Each dataset has one
 matplotlib figure window. The random choose process covers both training set
 and test set. So, we can be confident that the data is good!
 
-![image]()
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0000_show_mnist_fmnist.png)
 
 Try to click on the window, it will restart the whole process and then you
 can see another set of data image, which is also randomly choosed.
@@ -28,7 +28,7 @@ to train by using the whole 60K train data for each epoch.
 
 During the training, a plot would be displayed and updated in real time:
 
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/001_gd_mnist_fmnist.png)
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0010_gd_mnist_fmnist.png)
 
 All the hyper-parameters are the same for both networks.
 
