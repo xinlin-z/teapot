@@ -13,7 +13,7 @@ mtrdx, mtrdy, mtedx, mtedy = ds.load_mnist()
 ftrdx, ftrdy, ftedx, ftedy = ds.load_fmnist()
 
 # hyper-parameters
-eta = 1 
+eta = 0.5
 epoch = 1000
 nn_size = (784,120,10)
 
@@ -48,18 +48,24 @@ aflist = []
 mcost = []
 fcost = []
 
-ax1.set_title('NN:%s, Learning Rate:%d, Epoch:%d'%(str(nn_size),eta,epoch))
+ax1.set_title('NN:%s, Learning Rate:%f, Epoch:%d'%(str(nn_size),eta,epoch))
 ax1.plot(epochs, amlist, linewidth=0.5, color='r', label='MNIST')
 ax1.plot(epochs, aflist, linewidth=0.5, color='b', label='FMNIST')
 ax1.legend()
 ax1.set_xlabel('epoch')
 ax1.set_ylabel('accuracy')
+line11, = ax1.plot(1, 1, linewidth=0.1, color='r')
+line12, = ax1.plot(1, 1, linewidth=0.1, color='b')
+line13, = ax1.plot(1, 1, linewidth=0.1, color='g')
 
 ax2.plot(epochs, mcost, linewidth=0.5, color='r', label='MNIST')
 ax2.plot(epochs, fcost, linewidth=0.5, color='b', label='FMNIST')
 ax2.legend()
 ax2.set_xlabel('epoch')
 ax2.set_ylabel('cost')
+line21, = ax1.plot(1, 1, linewidth=0.1, color='r')
+line22, = ax1.plot(1, 1, linewidth=0.1, color='b')
+line23, = ax1.plot(1, 1, linewidth=0.1, color='g')
 
 for i in range(1,epoch):
     epochs.append(i)
@@ -86,13 +92,45 @@ for i in range(1,epoch):
     print('fmnist update, accuracy: %d, cost: %f' % (accuracy, cost))
     # plot
     try:
-        ax1.plot(epochs, amlist, linewidth=0.5, color='r', label='MNIST')
-        ax1.plot(epochs, aflist, linewidth=0.5, color='b', label='FMNIST')
-        ax2.plot(epochs, mcost,  linewidth=0.5, color='r', label='MNIST')
-        ax2.plot(epochs, fcost,  linewidth=0.5, color='b', label='FMNIST')
+        # mnist accuracy and tail line
+        ax1.plot(epochs, amlist, linewidth=0.2, color='r')
+        line11.remove()
+        amlast = [amlist[-1] for i in epochs]
+        line11, = ax1.plot(epochs, amlast, linewidth=0.1, color='r')
+        # fmnist accuracy and tail line
+        ax1.plot(epochs, aflist, linewidth=0.2, color='b')
+        line12.remove()
+        aflast = [aflist[-1] for i in epochs]
+        line12, = ax1.plot(epochs, aflast, linewidth=0.1, color='b')
+        # ax1 vertical line
+        line13.remove()
+        line13, = ax1.plot(
+            (epochs[-1], epochs[-1]),
+            (0, amlist[-1] if amlist[-1]>aflist[-1] else aflist[-1]),
+            linewidth = 0.1,
+            color = 'g')
+        # mnist cost and tail line
+        ax2.plot(epochs, mcost, linewidth=0.2, color='r')
+        line21.remove()
+        mclast = [mcost[-1] for i in epochs]
+        line21, = ax2.plot(epochs, mclast, linewidth=0.1, color='r')
+        # fmnist cost and tail line
+        ax2.plot(epochs, fcost, linewidth=0.2, color='b')
+        line22.remove()
+        fclast = [fcost[-1] for i in epochs]
+        line22, = ax2.plot(epochs, fclast, linewidth=0.1, color='b')
+        # ax2 vertical line
+        line23.remove()
+        line23, = ax2.plot(
+            (epochs[-1], epochs[-1]),
+            (0, mcost[-1] if mcost[-1]>fcost[-1] else fcost[-1]),
+            linewidth = 0.1,
+            color = 'g')
+
         plt.pause(0.001)
-    except:
-        ...
+    except Exception as e:
+        print(repr(e))
+        raise
 
 
 print('Done!')
