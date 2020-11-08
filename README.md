@@ -12,7 +12,7 @@ to train by using the whole 60K train data for each epoch.
 
 During the training, a plot would be displayed and updated in real time:
 
-![image]()
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/001_gd_mnist_fmnist.png)
 
 All the hyper-parameters are the same for both networks.
 
