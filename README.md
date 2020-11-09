@@ -1,16 +1,17 @@
 # teapot
 
-Here is my ML algorithm and matplotlib test lab.
+Here is my ML algorithm, numpy and matplotlib play ground.
 
 The best way of learning is by coding. I will try to re-code the ML algorithms
-and use matplotlib to plot in fancy ways.
+which I've learned by python and numpy, and use matplotlib to plot in
+fancy ways.
 
 ## 0000
 
     $ python3 0000_show_mnist_fmnist.py
 
-Show images in both mnist and fmnist dataset randomly. Each dataset has one
-matplotlib figure window. The random choose process covers both training set
+Show images in both MNIST and FMNIST dataset randomly. Each dataset has one
+matplotlib figure window. The random choosing process covers both training set
 and test set. So, we can be confident that the data is good!
 
 ![image](https://github.com/xinlin-z/teapot/blob/master/pics/0000_show_mnist_fmnist.png)
@@ -32,5 +33,6 @@ During the training, a plot would be displayed and updated in real time:
 
 All the hyper-parameters are the same for both networks.
 
-Obviously, FMNIST is harder, but not for the first 60 epochs roughly.
+Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
+
 
