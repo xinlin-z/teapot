@@ -40,31 +40,9 @@ class fffcnn():
             self.z.append(func.weighted_input(w,self.a[-1],b))
             self.a.append(self.af(self.z[-1]))
 
-    def cost_slow(self, data):
-        """total averaged cost over data pairs"""
-        return sum([self.cf(x[1],self.ff(x[0])) for x in data])/len(data)
-
     def cost(self, y, x):
         """total averaged cost over data pairs"""
         return self.cf(y, self.ff(x))/y.shape[1]
-
-    def backprop_slow(self, x, y):
-        """backprop algorithm, get gradient.
-        x, y are a single pair of the known input and output
-        return nabla w and b tuple with the same shape of nn."""
-        nabla_w = [np.zeros_like(w) for w in self.w]
-        nabla_b = [np.zeros_like(b) for b in self.b]
-        self.anz(x)
-        # the output layer
-        delta = self.cfda(y, self.a[-1])*self.afdz(self.z[-1])
-        nabla_b[-1] = delta
-        nabla_w[-1] = delta @ self.a[-2].T
-        # the rest layer, backward
-        for i in range(self.num_layers-2, 0, -1):
-            delta = self.w[i].T @ delta * self.afdz(self.z[i-1])
-            nabla_b[i-1] = delta
-            nabla_w[i-1] = delta @ self.a[i-1].T
-        return nabla_w, nabla_b
 
     def gd_slow(self, data, eta):
         """ gradient descent """
