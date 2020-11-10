@@ -47,6 +47,7 @@ anno2 = autolabel(rects2)
 plt.ion()
 
 for i in range(10000):
+    print('index of column in test set:[%d]' % i)
     p = knn(mtrdx, mtrdy, mtedx[:,i].reshape(784,1), K)
     t = np.argmax(mtedy[:,i])
     if p == t:
