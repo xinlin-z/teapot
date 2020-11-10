@@ -75,6 +75,7 @@ for i in range(10000):
     plt.pause(0.001)
 
 
+print('Done!')
 plt.ioff()
 plt.show()
 
