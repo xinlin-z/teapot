@@ -2,9 +2,9 @@
 
 Here is my ML algorithm, numpy and matplotlib play ground.
 
-The best way of learning is by coding. I will try to re-code the ML algorithms
+The best way to learning is by coding. I will try to re-code the ML algorithms
 which I've learned by python and numpy, and use matplotlib to plot in
-fancy ways.
+decent ways.
 
 ## 0000
 
@@ -35,4 +35,15 @@ All the hyper-parameters are the same for both networks.
 
 Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
 
+## 0020
+
+    $ python3 0020_mean_distance_mnist_fmnist.py
+
+Maybe the most simple and straight way to predict is to compute the L2 distance
+between test image and mean training image. The one to whom gets the smallest
+L2 distance is the prediction result.
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0020_mean_distance_mnist_fmnist.png)
+
+Again, FMNIST is harder. But this time, we could see the mean training images.
 
