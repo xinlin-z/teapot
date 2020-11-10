@@ -2,7 +2,10 @@ import numpy as np
 
 
 def knn(x, y, t, K):
-    """Use the same data format with dataset.load_mnist api."""
+    """Classification KNN.
+
+    Use the same data format with dataset.load_mnist api.
+    """
     dist = np.linalg.norm(x-t, axis=0)
     col = np.argsort(dist)
     kset = [(dist[col[i]],np.argmax(y[:,col[i]])) for i in range(K)]
