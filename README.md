@@ -10,7 +10,7 @@ decent ways. Yes, I am trying to reinvent the wheels.
 
 [0000 show MNIST & FMNIST data images randomly](#0000-show-mnist--fmnist-data-images-randomly)
 
-[0010 compare GD on MNIST & FMNIST](#0010-compare-gd-on-mnist--fmnist)
+[0010 compare GD on MNIST & FMNIST in Feedforward Fully Connected Neural Network](#0010-compare-gd-on-mnist--fmnist-in-feedforward-fully-connected-neural-network)
 
 [0020 compare distance to mean image on MNIST & FMNIST](#0020-compare-distance-to-mean-image-on-mnist--fmnist)
 
@@ -29,7 +29,7 @@ and test set. So, we can be confident that the data is good!
 Try to click on the window, it will restart the whole process and then you
 can see another set of data image, which is also randomly choosed.
 
-## 0010 compare GD on MNIST & FMNIST
+## 0010 compare GD on MNIST & FMNIST in Feedforward Fully Connected Neural Network
 
     $ python3 0010_gd_mnist_fmnist.py
 
