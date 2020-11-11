@@ -6,7 +6,7 @@ The best way to learning is by coding. I will try to re-code the ML algorithms
 which I've learned by python and numpy, and use matplotlib to plot in
 decent ways. Yes, I am trying to reinvent the wheels.
 
-## 0000
+## 0000 show MNIST & FMNIST data images randomly
 
     $ python3 0000_show_mnist_fmnist.py
 
@@ -19,7 +19,7 @@ and test set. So, we can be confident that the data is good!
 Try to click on the window, it will restart the whole process and then you
 can see another set of data image, which is also randomly choosed.
 
-## 0010
+## 0010 compare GD on MNIST & FMNIST
 
     $ python3 0010_gd_mnist_fmnist.py
 
@@ -35,7 +35,7 @@ All the hyper-parameters are the same for both networks.
 
 Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
 
-## 0020
+## 0020 compare distance to mean image on MNIST & FMNIST
 
     $ python3 0020_mean_distance_mnist_fmnist.py
 
@@ -47,7 +47,7 @@ L2 distance is the prediction result.
 
 Again, FMNIST is harder. But this time, we could see the mean training images.
 
-## 0030
+## 0030 compare KNN on MNIST & FMNIST
 
      $ python3 0030_knn_mnist_fmnist.py
 
