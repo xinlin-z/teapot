@@ -4,7 +4,7 @@ Here is my ML algorithm, numpy and matplotlib play ground.
 
 The best way to learning is by coding. I will try to re-code the ML algorithms
 which I've learned by python and numpy, and use matplotlib to plot in
-decent ways.
+decent ways. Yes, I am trying to reinvent the wheels.
 
 ## 0000
 
@@ -46,4 +46,17 @@ L2 distance is the prediction result.
 ![image](https://github.com/xinlin-z/teapot/blob/master/pics/0020_mean_distance_mnist_fmnist.png)
 
 Again, FMNIST is harder. But this time, we could see the mean training images.
+
+## 0030
+
+     $ python3 0030_knn_mnist_fmnist.py
+
+There is no learning process in KNN algorithm, so it's not a learning method
+and more computation load is need while prediction. Below is the whole result
+of using KNN on MNIST and FMNIST datasets:
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0030_knn_mnist_fmnist.png)
+
+This plot would be updated in real time while running the above python cmd.
+
 
