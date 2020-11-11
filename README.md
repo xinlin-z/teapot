@@ -9,9 +9,12 @@ decent ways. Yes, I am trying to reinvent the wheels.
 # Content
 
 [0000 show MNIST & FMNIST data images randomly](#0000-show-mnist--fmnist-data-images-randomly)
-[0010 compare GD on MNIST & FMNIST](#0010-compare-gd-on-mnist-fmnist)
-[0020 compare distance to mean image on MNIST & FMNIST](#0020-compare-distance-to-mean-image-on-mnist-fmnist)
-[0030 compare KNN on MNIST & FMNIST](#0020-compare-knn-on-mnist-fmnist)
+
+[0010 compare GD on MNIST & FMNIST](#0010-compare-gd-on-mnist--fmnist)
+
+[0020 compare distance to mean image on MNIST & FMNIST](#0020-compare-distance-to-mean-image-on-mnist--fmnist)
+
+[0030 compare KNN on MNIST & FMNIST](#0020-compare-knn-on-mnist--fmnist)
 
 ## 0000 show MNIST & FMNIST data images randomly
 
