@@ -6,7 +6,7 @@ The best way to learning is by coding. I will try to re-code the ML algorithms
 which I've learned by python and numpy, and use matplotlib to plot in
 decent ways. Yes, I am trying to reinvent the wheels.
 
-# Content
+# content
 
 [0000 show MNIST & FMNIST data images randomly](#0000-show-mnist--fmnist-data-images-randomly)
 
@@ -14,7 +14,7 @@ decent ways. Yes, I am trying to reinvent the wheels.
 
 [0020 compare distance to mean image on MNIST & FMNIST](#0020-compare-distance-to-mean-image-on-mnist--fmnist)
 
-[0030 compare KNN on MNIST & FMNIST](#0020-compare-knn-on-mnist--fmnist)
+[0030 compare KNN on MNIST & FMNIST](#0030-compare-knn-on-mnist--fmnist)
 
 ## 0000 show MNIST & FMNIST data images randomly
 
