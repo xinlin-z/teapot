@@ -1,15 +1,16 @@
 import numpy as np
 
 
-def knn(x, y, t, K):
+def knn(x, y, t, nc, K):
     """Classification KNN.
 
     Use the same data format with dataset.load_mnist api.
+    nc: number of classification
     """
     dist = np.linalg.norm(x-t, axis=0)
-    col = np.argsort(dist)
+    col = np.argpartition(dist, K)
     kset = [(dist[col[i]],np.argmax(y[:,col[i]])) for i in range(K)]
-    near = [0 for i in range(len(y.T))]
+    near = [0 for i in range(nc)]
     for it in kset:
         near[it[1]] += 1
     tm = max(near)  # the max
