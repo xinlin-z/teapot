@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import trange
 
 
 def knn(x, y, t, nc, K):
@@ -29,4 +30,40 @@ def knn(x, y, t, nc, K):
             near[itm] = 0  # change near list
         mdist.sort(key=lambda x:x[0])
         return mdist[0][1]
+
+
+def knn2(x, y, t, nc, K):
+    colnum = len(t.T)
+    colvs = []
+    dists = []
+    for i in trange(colnum):
+        dist = np.linalg.norm(x-t[:,i:i+1], axis=0)
+        cols = np.argpartition(dist,K)[:K]
+        dists.append(dist[cols])
+        colvs.append(np.argmax(y[:,cols],axis=0))
+    nears = []
+    for i in trange(colnum):
+        near = [0 for i in range(nc)]
+        for j in range(K):
+            near[colvs[i][j]] += 1
+        nears.append(near)
+    rt = []
+    for i in trange(colnum):
+        tm = max(nears[i])
+        if nears[i].count(tm) == 1:
+            rt.append(nears[i].index(tm))
+        else:
+            mdist = []
+            for j in range(nears[i].count(tm)):
+                itm = nears[i].index(tm)
+                tdist = 0
+                for d,k in zip(dists[i],colvs[i]):
+                    if k == itm:
+                        tdist += d
+                mdist.append((tdist,itm))
+                nears[i][itm] = 0
+            mdist.sort(key=lambda x:x[0])
+            rt.append(mdist[0][1])
+    return rt
+
 
