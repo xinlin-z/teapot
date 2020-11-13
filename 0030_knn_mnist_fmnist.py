@@ -48,7 +48,7 @@ plt.ion()
 
 for i in range(10000):
     print('index of column in test set:[%d]' % i)
-    p = knn(mtrdx, mtrdy, mtedx[:,i].reshape(784,1), 10, K)
+    p = knn(mtrdx, mtrdy, mtedx[:,i:i+1], 10, K)
     t = np.argmax(mtedy[:,i])
     if p == t:
         perf_s[0] += 1
@@ -57,7 +57,7 @@ for i in range(10000):
     print(' mnist, prediction=%d, truth=%d, %s'
                     %(p,t,'Success' if p==t else 'Fail'))
 
-    p = knn(ftrdx, ftrdy, ftedx[:,i].reshape(784,1), 10, K)
+    p = knn(ftrdx, ftrdy, ftedx[:,i:i+1], 10, K)
     t = np.argmax(ftedy[:,i])
     if p == t:
         perf_s[1] += 1
