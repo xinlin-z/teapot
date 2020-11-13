@@ -16,7 +16,9 @@ decent ways. Yes, I am trying to reinvent the wheels.
 
 [0030 compare KNN on MNIST & FMNIST](#0030-compare-knn-on-mnist--fmnist)
 
-## 0000 show MNIST & FMNIST data images randomly
+# show
+
+## 0000 show MNIST and FMNIST data images randomly
 
     $ python3 0000_show_mnist_fmnist.py
 
@@ -29,7 +31,9 @@ and test set. So, we can be confident that the data is good!
 Try to click on the window, it will restart the whole process and then you
 can see another set of data image, which is also randomly choosed.
 
-## 0010 compare GD on MNIST & FMNIST in Feedforward Fully Connected Neural Network
+# SGD
+
+## 0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network
 
     $ python3 0010_gd_mnist_fmnist.py
 
@@ -45,7 +49,9 @@ All the hyper-parameters are the same for both networks.
 
 Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
 
-## 0020 compare distance to mean image on MNIST & FMNIST
+# mean
+
+## 0020 compare distance to mean image on MNIST and FMNIST
 
     $ python3 0020_mean_distance_mnist_fmnist.py
 
@@ -57,7 +63,9 @@ L2 distance is the prediction result.
 
 Again, FMNIST is harder. But this time, we could see the mean training images.
 
-## 0030 compare KNN on MNIST & FMNIST
+# KNN
+
+## 0030 compare KNN on MNIST and FMNIST
 
      $ python3 0030_knn_mnist_fmnist.py
 
@@ -68,5 +76,19 @@ of using KNN on MNIST and FMNIST datasets:
 ![image](https://github.com/xinlin-z/teapot/blob/master/pics/0030_knn_mnist_fmnist.png)
 
 This plot would be updated in real time while running the above python cmd.
+
+## 0032 find the best K value on MNIST and FMNIST
+
+    $ python3 0032_knn3_test_diff_K.py
+
+I just want to know the best K value for MNIST and FMNIST dataset, so here
+it is:
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0032_knn3_test_diff_K.pnv)
+
+When K=3, MNIST gets 9717 right classifications, which is the best. When K=4,
+FMNIST gets 8596 right classifications, which is the best.
+
+K value should be amazingly small...
 
 
