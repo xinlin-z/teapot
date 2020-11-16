@@ -84,11 +84,11 @@ This plot would be updated in real time while running the above python cmd.
 I just want to know the best K value for MNIST and FMNIST dataset, so here
 it is:
 
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/0032_knn3_test_diff_K.pnv)
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0032_knn3_test_diff_K.png)
 
 When K=3, MNIST gets 9717 right classifications, which is the best. When K=4,
 FMNIST gets 8596 right classifications, which is the best.
 
-K value should be amazingly small...
+K value should be surprisingly small...
 
 
