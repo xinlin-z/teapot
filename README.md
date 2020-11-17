@@ -6,17 +6,7 @@ The best way to learning is by coding. I will try to re-code the ML algorithms
 which I've learned by python and numpy, and use matplotlib to plot in
 decent ways. Yes, I am trying to reinvent the wheels.
 
-# content
-
-[0000 show MNIST & FMNIST data images randomly](#0000-show-mnist--fmnist-data-images-randomly)
-
-[0010 compare GD on MNIST & FMNIST in Feedforward Fully Connected Neural Network](#0010-compare-gd-on-mnist--fmnist-in-feedforward-fully-connected-neural-network)
-
-[0020 compare distance to mean image on MNIST & FMNIST](#0020-compare-distance-to-mean-image-on-mnist--fmnist)
-
-[0030 compare KNN on MNIST & FMNIST](#0030-compare-knn-on-mnist--fmnist)
-
-# show
+# SHOW
 
 ## 0000 show MNIST and FMNIST data images randomly
 
@@ -49,7 +39,7 @@ All the hyper-parameters are the same for both networks.
 
 Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
 
-# mean
+# MEAN
 
 ## 0020 compare distance to mean image on MNIST and FMNIST
 
