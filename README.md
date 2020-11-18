@@ -1,4 +1,15 @@
-# teapot
+* [INTRO teapot](#INTRO-teapot)
+* [SHOW](#SHOW)
+    * [0000 show MNIST and FMNIST data images randomly](#0000-show-MNIST-and-FMNIST-data-images-randomly)
+* [SGD](#SGD)
+    * [0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network](#0010-compare-GD-on-MNIST-and-FMNIST-in-Feedforward-Fully-Connected-Neural-Network)
+* [MEAN](#MEAN)
+    * [0020 compare distance to mean image on MNIST and FMNIST](#0020-compare-distance-to-mean-image-on-MNIST-and-FMNIST)
+* [KNN](#KNN)
+    * [0030 compare KNN on MNIST and FMNIST](#0030-compare-KNN-on-MNIST-and-FMNIST)
+    * [0032 find the best K value on MNIST and FMNIST](#0032-find-the-best-K-value-on-MNIST-and-FMNIST)
+
+# INTRO teapot
 
 Here is my ML algorithm, numpy and matplotlib play ground.
 
