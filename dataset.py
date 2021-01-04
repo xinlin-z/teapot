@@ -213,51 +213,91 @@ def unpickle(file):
 
 def get_cifar10():
 
+    dp = ('data_batch_1', 'data_batch_2', 'data_batch_3',
+          'data_batch_4', 'data_batch_5')
+
     tr_d = []
-    dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_1')
-    for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3,32,32)/255  # channels * tall * width
-        a = a.astype(DATA_FLOAT_TYPE)
-        b = vectorized_result(dd['labels'][i])
-        tr_d.append((a,b))
-
-    dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_2')
-    for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3,32,32)/255
-        a = a.astype(DATA_FLOAT_TYPE)
-        b = vectorized_result(dd['labels'][i])
-        tr_d.append((a,b))
-
-    dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_3')
-    for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3,32,32)/255
-        a = a.astype(DATA_FLOAT_TYPE)
-        b = vectorized_result(dd['labels'][i])
-        tr_d.append((a,b))
-
-    dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_4')
-    for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3,32,32)/255
-        a = a.astype(DATA_FLOAT_TYPE)
-        b = vectorized_result(dd['labels'][i])
-        tr_d.append((a,b))
-
-    dd = unpickle(DATA_PATH_PREFIX+'cifar10/data_batch_5')
-    for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3,32,32)/255
-        a = a.astype(DATA_FLOAT_TYPE)
-        b = vectorized_result(dd['labels'][i])
-        tr_d.append((a,b))
+    for it in dp:
+        dd = unpickle(DATA_PATH_PREFIX+'cifar10/'+it)
+        for i in range(len(dd['data'])):
+            a = dd['data'][i].reshape(3,32,32)/255
+            a = a.astype(DTYPE)
+            b = vectorized_result(dd['labels'][i])
+            tr_d.append((a,b))
 
     te_d = []
     dd = unpickle(DATA_PATH_PREFIX+'cifar10/test_batch')
     for i in range(len(dd['data'])):
         a = dd['data'][i].reshape(3,32,32)/255
-        a = a.astype(DATA_FLOAT_TYPE)
+        a = a.astype(DTYPE)
         b = vectorized_result(dd['labels'][i])
         te_d.append((a,b))
 
     return tr_d, te_d
 
 
+def load_cifar10():
+
+    dp = ('data_batch_1', 'data_batch_2', 'data_batch_3',
+          'data_batch_4', 'data_batch_5')
+
+    trdx = []
+    trdy = []
+    for it in dp:
+        dd = unpickle(DATA_PATH_PREFIX+'cifar10/'+it)
+        for i in range(len(dd['data'])):
+            a = dd['data'][i].reshape(3*32*32,1)/255
+            a = a.astype(DTYPE)
+            trdx.append(a)
+            b = vectorized_result(dd['labels'][i])
+            trdy.append(b)
+
+    tedx = []
+    tedy = []
+    dd = unpickle(DATA_PATH_PREFIX+'cifar10/test_batch')
+    for i in range(len(dd['data'])):
+        a = dd['data'][i].reshape(3*32*32,1)/255
+        a = a.astype(DTYPE)
+        tedx.append(a)
+        b = vectorized_result(dd['labels'][i])
+        tedy.append(b)
+
+    return (np.hstack(trdx),
+            np.hstack(trdy),
+            np.hstack(tedx),
+            np.hstack(tedy))
+
+
+###########
+# iris.csv
+##########
+"""
+The first line says there are 150 samples, for each line there are 4 data and
+one category.
+4 data:
+(1), sepal length
+(2), sepal width
+(3), petal length
+(4), petal width
+1 category:
+(0), setosa
+(1), versicolour
+(2), virginica
+"""
+def get_iris():
+
+    with open(DATA_PATH_PREFIX+'iris.csv', 'r') as f:
+        dstr = f.readlines()
+
+    line = dstr[0].strip().split(',')
+    cat = []
+    cat.append(line[2])
+    cat.append(line[3])
+    cat.append(line[4])
+
+    data = []
+    for line in dstr[1:]:
+        data.append(tuple(line.strip().split(',')))
+
+    return cat, data
 

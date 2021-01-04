@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from func import *
+
+
+x = np.linspace(-5,5,1000)
+fig = plt.figure('Teapot: neuron show', figsize=(8,4))
+fig.suptitle('neuron\'s activation and derivative')
+fig.subplots_adjust(bottom=0,top=1,wspace=0.1,left=0.05,right=0.95)
+
+ax_left = fig.add_subplot(121)
+ax_left.set_aspect('equal')
+ax_left.spines['top'].set_color('none')
+ax_left.spines['right'].set_color('none')
+ax_left.spines['left'].set_position(('data',0))
+ax_left.spines['bottom'].set_position(('data',0))
+ax_left.plot(x, sigmoid(x), linewidth=0.5, label=r'$a=sigmoid(z)$')
+ax_left.plot(x, tanh(x), linewidth=0.5, label=r'$a=tanh(z)$')
+ax_left.plot(x, relu(x), linewidth=1.5, label=r'$a=relu(z)$')
+ax_left.plot(x, lu(x), linewidth=0.5, label=r'$a=lu(z)=z$')
+ax_left.set_xlim(-2.5,2.5)
+ax_left.set_ylim(-2,2)
+ax_left.set_xlabel('Z', loc='right')
+ax_left.set_ylabel('activation', loc='top')
+ax_left.set_xticks([-2,-1,1,2])
+ax_left.set_yticks([-2,-1,1,2])
+ax_left.legend(fontsize='small', loc='lower right')
+
+ax_right = fig.add_subplot(122)
+ax_right.set_aspect('equal')
+ax_right.spines['top'].set_color('none')
+ax_right.spines['right'].set_color('none')
+ax_right.spines['left'].set_position(('data',0))
+ax_right.spines['bottom'].set_position(('data',0))
+ax_right.plot(x, sigmoid_dz(x), linewidth=0.5, label=r'$sigmoid\'(z)$')
+ax_right.plot(x, tanh_dz(x), linewidth=0.5, label=r'$tanh\'(z)$')
+ax_right.plot(x, relu_dz(x), linewidth=1.5, label=r'$relu\'(z)$')
+ax_right.plot(x, lu_dz(x), linewidth=0.5, label=r'$lu\'(z)=1$')
+ax_right.set_xlim(-2.5,2.5)
+ax_right.set_ylim(-2,2)
+ax_right.set_xlabel('Z', loc='right')
+ax_right.set_ylabel('derivative', loc='top')
+ax_right.set_xticks([-2,-1,1,2])
+ax_right.set_yticks([-2,-1,0.25,1,2])
+ax_right.legend(fontsize='x-small', loc='lower left')
+
+plt.show()

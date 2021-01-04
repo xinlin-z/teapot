@@ -1,21 +1,26 @@
+# Contents
+
 * [INTRO teapot](#INTRO-teapot)
 * [SHOW](#SHOW)
     * [0000 show MNIST and FMNIST data images randomly](#0000-show-MNIST-and-FMNIST-data-images-randomly)
-* [SGD](#SGD)
+    * [0001 show neuron activation and derivative](#0001-show-neuron-activation-and-derivative)
+    * [0002 show iris data in 3D](#0002-show-iris-data-in-3D)
+    * [0003 show cifar10 data images randomly](#0003-show-cifar10-data-images-randomly)
+* [MLP](#MLP)
     * [0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network](#0010-compare-GD-on-MNIST-and-FMNIST-in-Feedforward-Fully-Connected-Neural-Network)
 * [MEAN](#MEAN)
     * [0020 compare distance to mean image on MNIST and FMNIST](#0020-compare-distance-to-mean-image-on-MNIST-and-FMNIST)
 * [KNN](#KNN)
     * [0030 compare KNN on MNIST and FMNIST](#0030-compare-KNN-on-MNIST-and-FMNIST)
     * [0032 find the best K value on MNIST and FMNIST](#0032-find-the-best-K-value-on-MNIST-and-FMNIST)
-
+.
 # INTRO teapot
 
 Here is my ML algorithm, numpy and matplotlib play ground.
 
 The best way to learning is by coding. I will try to re-code the ML algorithms
-which I've learned by python and numpy, and use matplotlib to plot in
-decent ways. Yes, I am trying to reinvent the wheels.
+which I've learned by python and numpy, and use matplotlib to plot as much as
+possible in decent ways. Yes, I am trying to reinvent the wheels.
 
 # SHOW
 
@@ -32,7 +37,25 @@ and test set. So, we can be confident that the data is good!
 Try to click on the window, it will restart the whole process and then you
 can see another set of data image, which is also randomly choosed.
 
-# SGD
+## 0001 show neuron activation and derivative
+
+    $ python3 0001_show_neuron.py
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0001_show_neuron.png)
+
+## 0002 show iris data in 3D
+
+    $ python3 0002_show_iris.py
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0002_show_iris.png)
+
+## 0003 show cifar10 data images randomly
+
+    $ python3 0003_show_cifar10.py
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0003_show_cifar10.png)
+
+# MLP
 
 ## 0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network
 

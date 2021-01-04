@@ -18,7 +18,7 @@ epoch = 1000
 nn_size = (784,120,10)
 
 # two same network for mnist and fmnsit
-mnn = nnet.fffcnn(nn_size)
+mnn = nnet.mlp(nn_size)
 mnn.load(
     activation_func =    func.sigmoid,
     activation_func_dz = func.sigmoid_dz,
@@ -26,7 +26,7 @@ mnn.load(
     cost_func_da =       func.cross_entropy_x_da
 )
 
-fnn = nnet.fffcnn(nn_size)
+fnn = nnet.mlp(nn_size)
 fnn.load(
     activation_func =    func.sigmoid,
     activation_func_dz = func.sigmoid_dz,
@@ -37,7 +37,8 @@ fnn.load(
 # plot
 plt.ion()
 fig = plt.figure('Teapot : %s' % sys.argv[0])
-fig.suptitle('MNIST vs. FMNIST')
+fig.suptitle('MNIST vs. FMNIST\n'
+             'NN:%s, Learning Rate:%f, Epoch:%d'%(str(nn_size),eta,epoch))
 ax1 = fig.add_subplot(121)
 ax2 = fig.add_subplot(122)
 
@@ -48,7 +49,6 @@ aflist = []
 mcost = []
 fcost = []
 
-ax1.set_title('NN:%s, Learning Rate:%f, Epoch:%d'%(str(nn_size),eta,epoch))
 ax1.plot(epochs, amlist, linewidth=0.5, color='r', label='MNIST')
 ax1.plot(epochs, aflist, linewidth=0.5, color='b', label='FMNIST')
 ax1.legend()

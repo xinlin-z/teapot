@@ -4,11 +4,11 @@ import dataset as ds
 import func
 
 
-class fffcnn():
+class mlp():
     """Feedforward Fully Connected Neural Network."""
 
     def __init__(self, sizes):
-        """ sizes: a tuple like (784, 15, 10) """
+        """ sizes: a tuple like (784,100,10) """
         self.num_layers = len(sizes)
         self.sizes = sizes
         self.b = [np.random.randn(x,1).astype(ds.DTYPE) for x in sizes[1:]]
@@ -43,18 +43,6 @@ class fffcnn():
     def cost(self, y, x):
         """total averaged cost over data pairs"""
         return self.cf(y, self.ff(x))/y.shape[1]
-
-    def gd_slow(self, data, eta):
-        """ gradient descent """
-        nabla_w = [np.zeros_like(w) for w in self.w]
-        nabla_b = [np.zeros_like(b) for b in self.b]
-        num = len(data)
-        for x,y in data:
-            delta_w, delta_b = self.backprop_slow(x, y)
-            nabla_w = [j+k for j,k in zip(nabla_w,delta_w)]
-            nabla_b = [j+k for j,k in zip(nabla_b,delta_b)]
-        self.w = [x-eta*w/num for x,w in zip(self.w, nabla_w)]
-        self.b = [x-eta*b/num for x,b in zip(self.b, nabla_b)]
 
     def backprop(self, x, y):
         nabla_w = [np.zeros_like(w) for w in self.w]
