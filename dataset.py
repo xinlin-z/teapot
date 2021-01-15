@@ -1,9 +1,21 @@
+"""
+MLP with sigmoid:
+    load_mnist
+    load_fmnist
+    load_cifar10
+
+MLP with tanh:
+    tload_mnist
+    tload_fmnist
+    tload_cifar10
+"""
+
+
 import pickle
 import gzip
 import os
 import random
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 DATA_PATH_PREFIX = 'data/'
@@ -84,15 +96,6 @@ def vectorized_result(j):
     return e
 
 
-def show_mnist(imgdata):
-    """mnist imgdata should be ndarray which shape is (784,1)"""
-    plt.imshow(imgdata.reshape(28,28), cmap='gray')
-    plt.show()
-    #plt.draw()
-    #plt.pause(0.001)
-    return
-
-
 ##############################
 # mnist data.
 ##############################
@@ -126,15 +129,11 @@ def load_mnist():
             tedl2.astype(DTYPE))
 
 
-def get_mnist_tanh():
-    tr, te = get_mnist()
-    trd = []
-    # ted = []
-    for i in range(len(tr)):
-        a = tr[i][0] - 0.5
-        # b = tr[i][1] - 0.5
-        trd.append((a,tr[i][1]))
-    return trd, te
+def tload_mnist():
+    """ normailization for tanh """
+    trdx, trdy, tedx, tedy = load_mnist()
+    return trdx*2-1, trdy, tedx*2-1, tedy
+
 
 def get_mnist_cnn():
     tr, te = get_mnist()
@@ -193,13 +192,9 @@ def load_fmnist():
     return trdx, trdy, tedx, tedy
 
 
-def get_fmnist_tanh():
-    tr, te = get_fmnist()
-    trd = []
-    for i in range(len(tr)):
-        a = tr[i][0] - 0.5
-        trd.append((a,tr[i][1]))
-    return trd, te
+def tload_fmnist():
+    trdx, trdy, tedx, tedy, = load_fmnist()
+    return trdx*2-1, trdy, tedx*2-1, tedy
 
 
 #######################
@@ -246,7 +241,7 @@ def load_cifar10():
     for it in dp:
         dd = unpickle(DATA_PATH_PREFIX+'cifar10/'+it)
         for i in range(len(dd['data'])):
-            a = dd['data'][i].reshape(3*32*32,1)/255
+            a = dd['data'][i].reshape(3*32*32,1)
             a = a.astype(DTYPE)
             trdx.append(a)
             b = vectorized_result(dd['labels'][i])
@@ -256,16 +251,21 @@ def load_cifar10():
     tedy = []
     dd = unpickle(DATA_PATH_PREFIX+'cifar10/test_batch')
     for i in range(len(dd['data'])):
-        a = dd['data'][i].reshape(3*32*32,1)/255
+        a = dd['data'][i].reshape(3*32*32,1)
         a = a.astype(DTYPE)
         tedx.append(a)
         b = vectorized_result(dd['labels'][i])
         tedy.append(b)
 
-    return (np.hstack(trdx),
+    return (np.hstack(trdx)/255,
             np.hstack(trdy),
-            np.hstack(tedx),
+            np.hstack(tedx)/255,
             np.hstack(tedy))
+
+
+def tload_cifar10():
+    trdx, trdy, tedx, tedy = load_cifar10()
+    return trdx*2-1, trdy, tedx*2-1, tedy
 
 
 ###########

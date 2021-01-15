@@ -7,7 +7,7 @@ import func
 class mlp():
     """Feedforward Fully Connected Neural Network."""
 
-    def __init__(self, sizes):
+    def __init__(self, sizes, neuron, output, costfunc):
         """ sizes: a tuple like (784,100,10) """
         self.num_layers = len(sizes)
         self.sizes = sizes
@@ -16,19 +16,52 @@ class mlp():
                         for x,y in zip(sizes[1:],sizes[:-1])]
         self.a = []  # layered activation value, including input layer.
         self.z = []  # layered weighted input
-
-    def load(self, *, activation_func, activation_func_dz,
-                      cost_func, cost_func_da):
-        self.af = activation_func
-        self.afdz = activation_func_dz
-        self.cf = cost_func
-        self.cfda = cost_func_da
+        # config check for neuron, output, costfunc
+        if neuron == 'sigmoid':
+            self.af = func.sigmoid
+            self.afdz = func.sigmoid_dz
+            if costfunc == 'quadratic':
+                assert output == 'sigmoid'
+                self.cf = func.quadratic
+                self.cfda = func.quadratic_da
+            elif costfunc == 'cross_entropy':
+                assert output == 'sigmoid'
+                self.cf = func.cross_entropy
+            elif costfunc == 'log_likelihood':
+                assert output == 'softmax'
+                self.cf = func.log_likelihood
+            else:
+                raise ValueError('costfunc not supported with sigmoid')
+        elif neuron == 'tanh':
+            self.af = func.tanh
+            self.afdz = func.tanh_dz
+            if costfunc == 'cross_entropy':
+                assert output == 'sigmoid'
+                self.cf = func.cross_entropy
+            elif costfunc == 'log_likelihood':
+                assert output == 'softmax'
+                self.cf = func.log_likelihood
+            else:
+                raise ValueError('costfunc not supported with tanh')
+        else:
+            raise ValueError('neuron not supported')
+        self.neuron = neuron
+        self.costfunc = costfunc
+        self.output = output
 
     def ff(self, a):
         """ feedforward """
-        for w,b in zip(self.w, self.b):
-            a = self.af(func.weighted_input(w,a,b))
-        return a
+        for w,b in zip(self.w[:-1], self.b[:-1]):
+            a = self.af(func.z(w,a,b))
+        z = func.z(self.w[-1], a, self.b[-1])
+        if self.output == 'softmax':
+            return func.softmax(z)
+        else:  # sigmoid
+            return func.sigmoid(z)
+
+    def cost(self, y, x):
+        """total averaged cost over data pairs"""
+        return self.cf(y, self.ff(x))/y.shape[1]
 
     def anz(self, a):
         """compute layered a and z,
@@ -36,21 +69,22 @@ class mlp():
         self.z.clear()
         self.a.clear()
         self.a.append(a)
-        for w,b in zip(self.w, self.b):
-            self.z.append(func.weighted_input(w,self.a[-1],b))
+        for w,b in zip(self.w[:-1], self.b[:-1]):
+            self.z.append(func.z(w,self.a[-1],b))
             self.a.append(self.af(self.z[-1]))
-
-    def cost(self, y, x):
-        """total averaged cost over data pairs"""
-        return self.cf(y, self.ff(x))/y.shape[1]
+        self.z.append(func.z(self.w[-1], self.a[-1], self.b[-1]))
+        if self.output == 'softmax':
+            self.a.append(func.softmax(self.z[-1]))
+        else:
+            self.a.append(self.af(self.z[-1]))
 
     def backprop(self, x, y):
         nabla_w = [np.zeros_like(w) for w in self.w]
         nabla_b = [np.zeros_like(b) for b in self.b]
         self.anz(x)
         # the output layer
-        if (self.cfda is func.cross_entropy_x_da
-            and self.afdz is func.sigmoid_dz):
+        if ((self.output=='sigmoid' and self.costfunc=='cross_entropy') or
+                (self.output=='softmax' and self.costfunc=='log_likelihood')):
             delta = self.a[-1] - y  # a little speed up
         else:
             delta = self.cfda(y, self.a[-1])*self.afdz(self.z[-1])

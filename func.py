@@ -44,26 +44,39 @@ def lu_dz(z):
     return np.ones_like(z, dtype=DTYPE)
 
 
-def qcost_x(y, a):
-    """Quadratic cost function only for a single input x,
+def softmax(z):
+    a = np.exp(z)
+    return a/np.sum(a,axis=0)
+
+
+def quadratic(y, a):
+    """Quadratic cost function,
     Cx = 1/2 * ||y(x)-a(x)||^2,
-    output is float number."""
+    output is float number.
+    """
     return 0.5*np.linalg.norm(y-a)**2
 
 
-def qcost_x_da(y, a):
+def quadratic_da(y, a):
     """ partial derivative of qcost_x for a """
     return a-y
 
 
-def cross_entropy_x(y, a):
+def cross_entropy(y, a):
     """ cross-entropy cost
     Cx = -sum((y*ln(a) + (1-y)*ln(1-a))) """
     return -np.sum(y*np.log(a)+(1-y)*np.log(1-a))
 
 
-def cross_entropy_x_da(y, a):
+def cross_entropy_da(y, a):
     """ partial derivative of corssentropy for a """
     return (a-y)/(a*(1-a))
 
+
+def log_likelihood(y, a):
+    return -np.sum(y*np.log(a))
+
+
+def log_likelihood_da(y, a):
+    return a-y
 

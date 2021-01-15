@@ -2,18 +2,17 @@
 
 * [INTRO teapot](#INTRO-teapot)
 * [SHOW](#SHOW)
-    * [0000 show MNIST and FMNIST data images randomly](#0000-show-MNIST-and-FMNIST-data-images-randomly)
-    * [0001 show neuron activation and derivative](#0001-show-neuron-activation-and-derivative)
-    * [0002 show iris data in 3D](#0002-show-iris-data-in-3D)
-    * [0003 show cifar10 data images randomly](#0003-show-cifar10-data-images-randomly)
+    * [0000 show MNIST & FMNIST & CIFAR10 data images randomly](#0000-show-MNIST--FMNIST--CIFAR10-data-images-randomly)
+    * [0001 show neuron activation & derivative](#0001-show-neuron-activation--derivative)
+    * [0002 show IRIS data in 3D](#0002-show-IRIS-data-in-3D)
 * [MLP](#MLP)
-    * [0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network](#0010-compare-GD-on-MNIST-and-FMNIST-in-Feedforward-Fully-Connected-Neural-Network)
+    * [0010 train MNIST & FMNIST & CIFAR10 in full batch](#0010-train-MNIST--FMNIST--CIFAR10-in-full-batch)
 * [MEAN](#MEAN)
     * [0020 compare distance to mean image on MNIST and FMNIST](#0020-compare-distance-to-mean-image-on-MNIST-and-FMNIST)
 * [KNN](#KNN)
     * [0030 compare KNN on MNIST and FMNIST](#0030-compare-KNN-on-MNIST-and-FMNIST)
     * [0032 find the best K value on MNIST and FMNIST](#0032-find-the-best-K-value-on-MNIST-and-FMNIST)
-.
+
 # INTRO teapot
 
 Here is my ML algorithm, numpy and matplotlib play ground.
@@ -24,54 +23,48 @@ possible in decent ways. Yes, I am trying to reinvent the wheels.
 
 # SHOW
 
-## 0000 show MNIST and FMNIST data images randomly
+## 0000 show MNIST & FMNIST & CIFAR10 data images randomly
 
     $ python3 0000_show_mnist_fmnist.py
 
-Show images in both MNIST and FMNIST dataset randomly. Each dataset has one
-matplotlib figure window. The random choosing process covers both training set
-and test set. So, we can be confident that the data is good!
+Show images in both MNIST, FMNIST and CIFAR10 dataset randomly. Each dataset
+has one matplotlib figure window. The random choosing process covers both
+training set and test set. So, we can be confident that the data is good!
 
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/0000_show_mnist_fmnist.png)
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0000_show_mnist_fmnist_cifar10.png)
 
-Try to click on the window, it will restart the whole process and then you
-can see another set of data image, which is also randomly choosed.
+Click on the window, it will restart the whole process and then you can see
+another set of data image, which is also randomly choosed.
 
-## 0001 show neuron activation and derivative
+## 0001 show neuron activation & derivative
 
     $ python3 0001_show_neuron.py
 
 ![image](https://github.com/xinlin-z/teapot/blob/master/pics/0001_show_neuron.png)
 
-## 0002 show iris data in 3D
+## 0002 show IRIS data in 3D
 
     $ python3 0002_show_iris.py
 
 ![image](https://github.com/xinlin-z/teapot/blob/master/pics/0002_show_iris.png)
 
-## 0003 show cifar10 data images randomly
-
-    $ python3 0003_show_cifar10.py
-
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/0003_show_cifar10.png)
+It's obvious that different flowers belong to different spaces.
 
 # MLP
 
-## 0010 compare GD on MNIST and FMNIST in Feedforward Fully Connected Neural Network
+## 0010 train MNIST & FMNIST & CIFAR10 in full batch
 
-    $ python3 0010_gd_mnist_fmnist.py
+    $ python3 0010_mlp_mnist_fmnist_cifar10.py
 
-Comparing the training process and results for MNIST and FMNIST dataset by
-pure GD and in a pure feed forward fully connected neural network, which means
-to train by using the whole 60K train data for each epoch.
+Comparing the training process and results for MNIST, FMNIST and CIFAR10
+dataset by MLP neural network in full batch, which means to train by using
+the whole 60K train data (50K for CIFAR10) for each epoch.
 
 During the training, a plot would be displayed and updated in real time:
 
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/0010_gd_mnist_fmnist.png)
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0010_gd_mnist_fmnist_cifar10.png)
 
-All the hyper-parameters are the same for both networks.
-
-Obviously, FMNIST is harder, but not for the first 60 epochs roughly. Why?
+All the hyper-parameters are the same.
 
 # MEAN
 
