@@ -66,6 +66,12 @@ During the training, a plot would be displayed and updated in real time:
 
 All the hyper-parameters are the same.
 
+## 0011 train FMNIST with different config in MLP network
+
+    $ python3 0011_mlp_fmnist_diff_config.py
+
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0011_mlp_fmnist_diff_config.png)
+
 # MEAN
 
 ## 0020 compare distance to mean image on MNIST and FMNIST
