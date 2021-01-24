@@ -7,6 +7,7 @@
     * [0002 show IRIS data in 3D](#0002-show-IRIS-data-in-3D)
 * [MLP](#MLP)
     * [0010 train MNIST & FMNIST & CIFAR10 in full batch](#0010-train-MNIST--FMNIST--CIFAR10-in-full-batch)
+    * [0011 train FMNIST with different config in MLP network](#0011-train-FMNIST-with-different-config-in-MLP-network)
 * [MEAN](#MEAN)
     * [0020 compare distance to mean image on MNIST and FMNIST](#0020-compare-distance-to-mean-image-on-MNIST-and-FMNIST)
 * [KNN](#KNN)

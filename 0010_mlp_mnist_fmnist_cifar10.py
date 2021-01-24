@@ -21,9 +21,9 @@ nn2 = (28*28,240,60,10)
 nn3 = (32*32*3,240,60,10)
 
 # two same network for mnist and fmnsit
-mnn = nnet.mlp(nn1, neuron='sigmoid', costfunc='cross_entropy')
-fnn = nnet.mlp(nn2, neuron='sigmoid', costfunc='cross_entropy')
-cnn = nnet.mlp(nn3, neuron='sigmoid', costfunc='cross_entropy')
+mnn = nnet.mlp(nn1, neuron='sigmoid', output='sigmoid', costfunc='cross_entropy')
+fnn = nnet.mlp(nn2, neuron='sigmoid', output='sigmoid', costfunc='cross_entropy')
+cnn = nnet.mlp(nn3, neuron='sigmoid', output='sigmoid', costfunc='cross_entropy')
 
 # plot
 plt.ion()
