@@ -62,7 +62,7 @@ the whole 60K train data (50K for CIFAR10) for each epoch.
 
 During the training, a plot would be displayed and updated in real time:
 
-![image](https://github.com/xinlin-z/teapot/blob/master/pics/0010_gd_mnist_fmnist_cifar10.png)
+![image](https://github.com/xinlin-z/teapot/blob/master/pics/0010_mlp_mnist_fmnist_cifar10.png)
 
 All the hyper-parameters are the same.
 
