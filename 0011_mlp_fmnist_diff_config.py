@@ -70,7 +70,7 @@ ax2.plot(epochs, ccost, linewidth=0.5, color='y', label='sigmoid+softmax+log_lik
 ax2.plot(epochs, tcost, linewidth=0.5, color='c', label='tanh+softmax+log_likelihood')
 ax2.legend()
 ax2.set_xlabel('epoch')
-ax2.set_ylabel('cost')
+ax2.set_ylabel('test cost')
 line21, = ax1.plot(1, 1, linewidth=0.1, color='r')
 line22, = ax1.plot(1, 1, linewidth=0.1, color='b')
 line23, = ax1.plot(1, 1, linewidth=0.1, color='y')
@@ -87,7 +87,7 @@ for i in range(1,epoch+1):
     right_result = np.argmax(ftedy, axis=0)
     accuracy = sum([int(x==y) for x,y in zip(test_result,right_result)])
     amlist.append(accuracy)
-    cost = mnn1.cost(ftedy, ftedx)
+    cost = mnn1.cost(ftedy, ma)
     mcost.append(cost)
     print(' mnn1 update, accuracy: %d, cost: %f' % (accuracy, cost))
     # mnn2
@@ -97,7 +97,7 @@ for i in range(1,epoch+1):
     right_result = np.argmax(ftedy, axis=0)
     accuracy = sum([int(x==y) for x,y in zip(test_result,right_result)])
     aflist.append(accuracy)
-    cost = mnn2.cost(ftedy, ftedx)
+    cost = mnn2.cost(ftedy, fa)
     fcost.append(cost)
     print(' mnn2 update, accuracy: %d, cost: %f' % (accuracy, cost))
     # mnn3 
@@ -107,7 +107,7 @@ for i in range(1,epoch+1):
     right_result = np.argmax(ftedy, axis=0)
     accuracy = sum([int(x==y) for x,y in zip(test_result,right_result)])
     aclist.append(accuracy)
-    cost = mnn3.cost(ftedy, ftedx)
+    cost = mnn3.cost(ftedy, ca)
     ccost.append(cost)
     print(' mnn3 update, accuracy: %d, cost: %f' % (accuracy, cost))
     # mnn4 
@@ -117,7 +117,7 @@ for i in range(1,epoch+1):
     right_result = np.argmax(ttedy, axis=0)
     accuracy = sum([int(x==y) for x,y in zip(test_result,right_result)])
     atlist.append(accuracy)
-    cost = mnn4.cost(ttedy, ttedx)
+    cost = mnn4.cost(ttedy, ta)
     tcost.append(cost)
     print(' mnn4 update, accuracy: %d, cost: %f' % (accuracy, cost))
     # plot

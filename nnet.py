@@ -59,9 +59,9 @@ class mlp():
         else:  # sigmoid
             return func.sigmoid(z)
 
-    def cost(self, y, x):
+    def cost(self, y, a):
         """total averaged cost over data pairs"""
-        return self.cf(y, self.ff(x))/y.shape[1]
+        return self.cf(y, a)/y.shape[1]
 
     def anz(self, a):
         """compute layered a and z,
